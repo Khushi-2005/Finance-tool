@@ -65,4 +65,3 @@ if file is not None:
         
         st.title("Day of week")
         helper.Dayofweek(selected_user, df)
-
