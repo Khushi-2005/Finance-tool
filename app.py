@@ -1,10 +1,6 @@
-
-       
 import streamlit as st
-import preprocessor  # Assuming this is a custom module in your project
-import helper  # Assuming this is a custom module in your project
-import matplotlib.pyplot as plt
-import seaborn as sns
+import preprocessor  # Make sure this file is in the same directory or properly importable
+import helper  # Make sure this file is in the same directory or properly importable
 import pandas as pd
 
 st.set_page_config(layout='wide')
@@ -45,12 +41,10 @@ if file is not None:
         # Create columns for top debit and credit persons
         col4, col5 = st.columns(2)
         with col4:
-            top_debit_persons.columns = ['Name', 'Debit Amount']
             st.write("Top 5 Debit:")
             st.write(top_debit_persons)
 
         with col5:
-            top_credit_persons.columns = ['Name', 'Credit Amount']  # Ensure correct column name
             st.write("Top 5 Credit:")
             st.write(top_credit_persons)
 
@@ -66,4 +60,3 @@ if file is not None:
 
         st.title("Day of Week")
         helper.Dayofweek(selected_user, df)
-
