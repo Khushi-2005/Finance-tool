@@ -1,6 +1,6 @@
 import streamlit as st
-import preprocessor  # Make sure this file is in the same directory or properly importable
-import helper  # Make sure this file is in the same directory or properly importable
+import preprocessor  # Ensure this file is in the same directory or properly importable
+import helper  # Ensure this file is in the same directory or properly importable
 import pandas as pd
 
 st.set_page_config(layout='wide')
