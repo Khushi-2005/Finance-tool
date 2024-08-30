@@ -1,15 +1,17 @@
 
-    from urlextract import URLExtract
+
+  from urlextract import URLExtract
 import pandas as pd
 from collections import Counter
-extract = URLExtract()
 import matplotlib.pyplot as plt
 import streamlit as st
 
-def fetch_stats(selected_user,df):
+extract = URLExtract()
+
+def fetch_stats(selected_user, df):
     if selected_user != 'Overall':
         df = df[df['Name'] == selected_user]
-    # fetch the number of messages
+    # Fetch the number of transactions
     num_trans = df.shape[0]
     deb = df[df['Type'] == 'DEBIT']['Amount'].sum()
     cre = df[df['Type'] == 'CREDIT']['Amount'].sum()
@@ -23,19 +25,14 @@ def fetch_stats(selected_user,df):
     top_credit_persons.columns = ['Name', 'Credit Amount']
     
     return num_trans, deb, cre, top_debit_persons, top_credit_persons
-   
-   
-   
-   
-   
-   
+
 def total_amount_spent_by_month(selected_user, df):
     if selected_user != 'Overall':
         df = df[df['Name'] == selected_user]
     monthly_data = df.groupby('Month')['Amount'].sum()
     
     # Plotting the bar chart
-    plt.figure(figsize=(14  , 6))
+    plt.figure(figsize=(14, 6))  # Fixed the figsize tuple
     colors = plt.cm.tab20c.colors[:len(monthly_data)]
     bars = plt.bar(monthly_data.index, monthly_data.values, color=colors, edgecolor='black')
     plt.grid(axis='y', linestyle='--', alpha=0.7)
@@ -48,13 +45,11 @@ def total_amount_spent_by_month(selected_user, df):
         yval = bar.get_height()
         plt.text(bar.get_x() + bar.get_width() / 2, yval + 5, round(yval, 2), ha='center', va='bottom')
     st.pyplot(plt)
-    
-    
-    
-    
+    plt.close()  # Closing the figure to avoid memory issues
+
 def Percentage_of_Transaction_Types(selected_user, df):
     if selected_user != 'Overall':
-        df = df[df['Name'] == selected_user] 
+        df = df[df['Name'] == selected_user]
     plt.figure(figsize=(16, 2))
     transaction_types = df['Type'].value_counts()
     colors = ['#66c2a5', '#fc8d62', '#8da0cb', '#e78ac3']
@@ -62,14 +57,11 @@ def Percentage_of_Transaction_Types(selected_user, df):
             colors=colors, shadow=True)
     plt.title('Percentage of Transaction Types', fontweight='bold', fontsize=20)
     st.pyplot(plt)
+    plt.close()  # Closing the figure to avoid memory issues
 
-    
-    
-    
-    
 def Dailyamountspend(selected_user, df):
     if selected_user != 'Overall':
-        df = df[df['Name'] == selected_user] 
+        df = df[df['Name'] == selected_user]
     daily_data = df.groupby('Date')['Amount'].sum()
     plt.figure(figsize=(14, 6))
     plt.plot(daily_data.index, daily_data.values, marker='o', linestyle='-', color='b')
@@ -80,10 +72,11 @@ def Dailyamountspend(selected_user, df):
     plt.xticks(rotation=45, fontsize=10)
     plt.yticks(fontsize=10)
     st.pyplot(plt)
-    
+    plt.close()  # Closing the figure to avoid memory issues
+
 def Dayofweek(selected_user, df):
     if selected_user != 'Overall':
-        df = df[df['Name'] == selected_user] 
+        df = df[df['Name'] == selected_user]
     day_of_week_data = df.groupby('Day_of_Week')['Amount'].sum()
 
     # Plotting the bar chart with customizations
@@ -96,6 +89,8 @@ def Dayofweek(selected_user, df):
     plt.xticks(rotation=45, ha='right', fontsize=10)
     plt.yticks(fontsize=10)
     st.pyplot(plt)
+    plt.close()  # Closing the figure to avoid memory issues
+
     
     
     
