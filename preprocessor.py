@@ -1,5 +1,4 @@
-
-   import pandas as pd
+import pandas as pd
 
 def preprocess(data):
     """
@@ -15,9 +14,3 @@ def preprocess(data):
     data['Day_of_Week'] = data['Date'].dt.day_name()
 
     return data
-
-    
-    
-    
-    
-
